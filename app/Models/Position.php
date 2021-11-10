@@ -9,6 +9,8 @@ class Position extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -17,12 +19,4 @@ class Position extends Model
     protected $fillable = [
         'name',
     ];
-//
-//    /**
-//     * @return HasMany
-//     */
-//    public function users(): HasMany
-//    {
-//        return $this->hasMany(User::class);
-//    }
 }
