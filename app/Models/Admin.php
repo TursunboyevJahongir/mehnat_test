@@ -4,11 +4,21 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+
+/**
+ * Class Category
+ * @package App\Models
+ * @property int id
+ * @property string name
+ * @property string login
+ * @property string password
+ */
 class Admin extends Authenticatable implements JWTSubject
 {
-    use HasFactory;
+    use HasFactory, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -28,9 +38,8 @@ class Admin extends Authenticatable implements JWTSubject
      */
     protected $hidden = [
         'password',
-        'remember_token',
+        'login',
     ];
-
 
 
     /**
@@ -38,7 +47,8 @@ class Admin extends Authenticatable implements JWTSubject
      *
      * @return mixed
      */
-    public function getJWTIdentifier() {
+    public function getJWTIdentifier()
+    {
         return $this->getKey();
     }
 
@@ -47,7 +57,8 @@ class Admin extends Authenticatable implements JWTSubject
      *
      * @return array
      */
-    public function getJWTCustomClaims() {
+    public function getJWTCustomClaims()
+    {
         return [];
     }
 }
