@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\ApiController;
-use App\Http\Requests\api\RoleCreateRequest;
-use App\Http\Requests\api\RoleUpdateRequest;
+use App\Http\Requests\Api\RoleCreateRequest;
+use App\Http\Requests\Api\RoleUpdateRequest;
 use App\Http\Resources\Api\RoleResource;
 use App\Http\Resources\Api\RoleWithPermissionsResource;
 use App\Services\AdminService;

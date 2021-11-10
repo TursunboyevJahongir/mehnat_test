@@ -40,6 +40,11 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'update admin']);
         Permission::create(['name' => 'delete admin']);
 
+        Permission::create(['name' => 'read position']);
+        Permission::create(['name' => 'create position']);
+        Permission::create(['name' => 'update position']);
+        Permission::create(['name' => 'delete position']);
+
         $admin->syncPermissions(Permission::all());
 
         Permission::create(['name' => 'read role']);

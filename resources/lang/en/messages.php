@@ -8,5 +8,5 @@ return [
     'invalid_password' => 'password is incorrect',
     'cannot_delete_using_element' => 'You cannot delete the used element, the but can edit',
     'cannot_change_superadmin' => "You don't have access to delete or update SuperAdmin",
-
+    'position_deleted' => "':attribute' position removed",
 ];

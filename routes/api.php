@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\api\AdminController;
-use App\Http\Controllers\api\AuthController;
-use App\Http\Controllers\api\RoleController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\AdminController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\PositionController;
+use App\Http\Controllers\Api\RoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,5 +35,10 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         Route::post('role', [RoleController::class, 'create'])->middleware('can:create role');
         Route::post('role/{name}', [RoleController::class, 'update'])->middleware('can:update role');
         Route::delete('role/{name}', [RoleController::class, 'delete'])->middleware('can:delete role');
+
+        Route::get('position', [PositionController::class, 'index'])->middleware('can:read position');
+        Route::post('position', [PositionController::class, 'create'])->middleware('can:create position');
+        Route::post('position/{id}', [PositionController::class, 'update'])->middleware('can:update position');
+        Route::delete('position/{id}', [PositionController::class, 'delete'])->middleware('can:delete position');
     });
 });
