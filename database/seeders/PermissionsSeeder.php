@@ -19,11 +19,8 @@ class PermissionsSeeder extends Seeder
     {
         $superadmin = Role::create(['name' => 'superadmin'],);
         $admin = Role::create(['name' => 'admin']);
+        $director = Role::create(['name' => 'director']);
 
-        Permission::create(['name' => 'read admin']);
-        Permission::create(['name' => 'create admin']);
-        Permission::create(['name' => 'update admin']);
-        Permission::create(['name' => 'delete admin']);
 
         Permission::create(['name' => 'read company']);
         Permission::create(['name' => 'create company']);
@@ -35,8 +32,21 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'update employee']);
         Permission::create(['name' => 'delete employee']);
 
-        $superadmin->syncPermissions(Permission::all());//ikkisining farqi kimgadir admin huquqi berilsa u bosh adminni o'chirolmasligi uchun
+        $director->syncPermissions(Permission::all());
+
+
+        Permission::create(['name' => 'read admin']);
+        Permission::create(['name' => 'create admin']);
+        Permission::create(['name' => 'update admin']);
+        Permission::create(['name' => 'delete admin']);
+
         $admin->syncPermissions(Permission::all());
+
+        Permission::create(['name' => 'read role']);
+        Permission::create(['name' => 'create role']);
+        Permission::create(['name' => 'update role']);
+        Permission::create(['name' => 'delete role']);
+        $superadmin->syncPermissions(Permission::all());//ikkisining farqi kimgadir admin huquqi berilsa u bosh adminni o'chirolmasligi uchun
 
         $first = Admin::first();
 

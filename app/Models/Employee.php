@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * Class Category
@@ -20,12 +22,13 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string phone
  * @property string address
  * @property string passport
- * @property Company|hasOne company
+ * @property Company|belongsTo company
+ * @property Company|hasOne director
  * @property Position|belongsTo position
  */
-class Employee extends Model
+class Employee extends Authenticatable implements JWTSubject
 {
-    use HasFactory;
+    use HasFactory, HasRoles;
 
     protected $fillable = [
         'first_name',
@@ -40,12 +43,12 @@ class Employee extends Model
         'passport',
     ];
 
-//    public function company(): BelongsTo
-//    {
-//        return $this->belongsTo(Company::class);
-//    }
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
+    }
 
-    public function company(): HasOne
+    public function director(): HasOne
     {
         return $this->hasOne(Company::class, 'chief_id');
     }
@@ -53,5 +56,15 @@ class Employee extends Model
     public function position(): BelongsTo
     {
         return $this->belongsTo(Position::class);
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }
