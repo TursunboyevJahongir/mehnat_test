@@ -46,6 +46,9 @@ class PositionController extends ApiController
      */
     public function delete(Position $id): JsonResponse
     {
+        if ($id->id === 1) {
+            return $this->error(__('messages.cannot_delete_using_element'));
+        }
         $id->delete();
         return $this->success(__('messages.position_deleted', ['attribute' => $id->name]));
     }
