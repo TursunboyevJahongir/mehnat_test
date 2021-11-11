@@ -13,15 +13,16 @@ class AuthController extends ApiController
     public function login(LoginRequest $request): JsonResponse
     {
         try {
-            return $this->success(__('messages.success'), AdminService::Login($request->validated()));
+            $attempt = $request->only('login', 'password');
+            return $this->success(__('messages.success'), AdminService::login($request->validated()['type'], $attempt));
         } catch (\Throwable $e) {
             return $this->error($e->getMessage(), null, $e->getCode());
         }
     }
 
-    public function refresh(): JsonResponse
+    public function refresh(string $type): JsonResponse
     {
-        return $this->success(__('messages.success'), AdminService::createNewToken(auth('api')->refresh()));
+        return $this->success(__('messages.success'), AdminService::createNewToken(auth($type)->refresh(), $type));
     }
 
     public function logout(): JsonResponse

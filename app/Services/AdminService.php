@@ -4,34 +4,38 @@
 namespace App\Services;
 
 use App\Models\Admin;
-use App\Models\User;
+use App\Models\Employee;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
 
 class AdminService
 {
-    public static function Login(array $data): array
+    public static function login($type, array $data): array
     {
-        if (!$token = auth('api')->attempt($data)) {
+//        Config::set('jwt.user', Admin::class);
+//        Config::set('auth.admin', Admin::class);
+        if (!$token = auth($type)->attempt($data)) {
             throw new \Exception(__('messages.invalid_login'), 401);
         }
-
-        return self::createNewToken($token);
+        return self::createNewToken($token, $type);
     }
 
-    /**
-     * Get the token array structure.
-     *
-     * @param string $token
-     *
-     * @return array
-     */
-    public static function createNewToken(string $token)
+    public static function EmployeeLogin(array $data): array
+    {
+        $type = 'employee-api';
+        if (!$token = auth($type)->attempt($data)) {
+            throw new \Exception(__('messages.invalid_login'), 401);
+        }
+        return self::createNewToken($token, $type);
+    }
+
+    public static function createNewToken(string $token, $type)
     {
         return
             [
                 'access_token' => $token,
                 'token_type' => 'bearer',
-                'expires_in' => auth('api')->factory()->getTTL() * 60
+                'expires_in' => auth($type)->factory()->getTTL() * 60
             ];
     }
 

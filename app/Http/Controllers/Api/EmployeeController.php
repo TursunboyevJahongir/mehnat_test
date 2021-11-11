@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\ApiController;
+use App\Http\Requests\Api\AdminUpdateRequest;
 use App\Http\Requests\Api\EmployeeCreateRequest;
+use App\Http\Requests\Api\EmployeeUpdateProfileRequest;
 use App\Http\Requests\Api\EmployeeUpdateRequest;
+use App\Http\Resources\Api\AdminResource;
 use App\Http\Resources\Api\AllEmployeeResource;
 use App\Http\Resources\Api\EmployeeResource;
 use App\Http\Resources\Api\PaginationResourceCollection;
@@ -73,5 +76,21 @@ class EmployeeController extends ApiController
     {
         $id->delete();
         return $this->success(__('messages.employee_deleted', ['attribute' => $id->first_name]));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return JsonResponse
+     */
+    public function me(): JsonResponse
+    {
+        return $this->success(__('messages.success'), new EmployeeResource(auth()->user()));
+    }
+
+    public function updateProfile(EmployeeUpdateProfileRequest $request): JsonResponse
+    {
+        $this->service->updateProfile($request->validated());
+        return $this->success(__('messages.success'), new EmployeeResource(auth()->user()));
     }
 }

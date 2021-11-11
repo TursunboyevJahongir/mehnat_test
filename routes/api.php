@@ -22,13 +22,13 @@ Route::prefix('auth')->group(static function () {
     Route::post('login', [AuthController::class, 'login']);
 });
 
-Route::group(['middleware' => ['jwt.verify']], function () {
+Route::middleware('jwt.verify')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
-    Route::post('refresh', [AuthController::class, 'refresh']);
+    Route::post('refresh/{type}', [AuthController::class, 'refresh']);
 
-    Route::prefix('admin')->group(static function () {
+    Route::middleware('auth:admin-api')->prefix('admin')->group(static function () {
         Route::get('me', [AdminController::class, 'me']);
-        Route::put('me', [AdminController::class, 'update']);
+        Route::put('me', [AdminController::class, 'updateProfile']);
 
         Route::get('roles', [RoleController::class, 'index'])->middleware('can:read role');
         Route::get('permissions', [RoleController::class, 'permissions'])->middleware('can:read role');
@@ -48,5 +48,10 @@ Route::group(['middleware' => ['jwt.verify']], function () {
         Route::post('employee', [EmployeeController::class, 'create'])->middleware('can:create employee');
         Route::put('employee', [EmployeeController::class, 'update'])->middleware('can:update employee');
         Route::delete('employee/{id}', [EmployeeController::class, 'delete'])->middleware('can:delete employee');
+    });
+
+    Route::middleware('auth:employee-api')->prefix('employee')->group(static function () {
+        Route::get('me', [EmployeeController::class, 'me']);
+        Route::put('me', [EmployeeController::class, 'updateProfile']);
     });
 });

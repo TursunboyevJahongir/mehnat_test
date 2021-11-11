@@ -46,6 +46,15 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+        'employee-api' => [
+            'driver' => 'jwt',
+            'provider' => 'employees',
+        ],
+        'admin-api' => [
+            'driver' => 'jwt',
+            'provider' => 'admins',
+        ],
+
     ],
 
     /*
@@ -67,6 +76,16 @@ return [
 
     'providers' => [
         'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
+
+        'employees' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Employee::class,
+        ],
+
+        'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],

@@ -48,6 +48,12 @@ class EmployeeService
         $employee->update($data);
     }
 
+    public function updateProfile(array $data)
+    {
+        !isset($data['new_password']) ?: $data['password'] = Hash::make($data['new_password']);
+        auth()->user()->update($data);
+    }
+
     public function delete(string $name)
     {
         if ($name === 'superadmin') {

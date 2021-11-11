@@ -26,7 +26,7 @@ class AdminController extends ApiController
         return $this->success(__('messages.success'), new AdminResource(auth()->user()));
     }
 
-    public function update(AdminUpdateRequest $request): JsonResponse
+    public function updateProfile(AdminUpdateRequest $request): JsonResponse
     {
         $this->service->updateProfile($request->validated());
         return $this->success(__('messages.success'), new AdminResource(auth()->user()));
