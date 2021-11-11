@@ -37,7 +37,7 @@ class AdminService
 
     public static function updateProfile(array $data)
     {
-        $data['password'] = Hash::make($data['new_password']);
+        !isset($data['new_password']) ?: $data['password'] = Hash::make($data['new_password']);
         auth()->user()->update($data);
     }
 }
