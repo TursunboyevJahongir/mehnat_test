@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CompanyController;
+use App\Http\Controllers\Api\DirectorEmployeeController;
 use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\RoleController;
@@ -58,13 +59,19 @@ Route::middleware('jwt.verify')->group(function () {
     });
 
     Route::middleware('auth:employee-api')->prefix('employee')->group(static function () {
-        Route::get('me', [EmployeeController::class, 'me']);
-        Route::put('me', [EmployeeController::class, 'updateProfile']);
+        Route::get('me', [DirectorEmployeeController::class, 'me']);
+        Route::put('me', [DirectorEmployeeController::class, 'updateProfile']);
 
         Route::get('company', [CompanyController::class, 'myCompany']);
 
-        Route::middleware('only.director')->group(static function () {
-            Route::put('company', [CompanyController::class, 'updateMyCompany']);
+        Route::middleware('only.director')->prefix('company')->group(static function () {
+            Route::put('/', [CompanyController::class, 'updateMyCompany']);
+
+            Route::get('employee', [DirectorEmployeeController::class, 'index']);
+            Route::get('employee/{id}', [DirectorEmployeeController::class, 'show']);
+            Route::post('employee', [DirectorEmployeeController::class, 'create']);
+            Route::put('employee', [DirectorEmployeeController::class, 'update']);
+            Route::delete('employee/{id}', [DirectorEmployeeController::class, 'delete']);
         });
     });
 });

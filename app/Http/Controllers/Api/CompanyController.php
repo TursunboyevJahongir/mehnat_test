@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\Api\CompanyCreateRequest;
 use App\Http\Requests\Api\CompanyUpdateRequest;
-use App\Http\Requests\Api\MyCompanyUpdateRequest;
+use App\Http\Requests\Api\Directory\MyCompanyUpdateRequest;
 use App\Http\Resources\Api\AllCompaniesResource;
 use App\Http\Resources\Api\CompanyResource;
 use App\Http\Resources\Api\PaginationResourceCollection;

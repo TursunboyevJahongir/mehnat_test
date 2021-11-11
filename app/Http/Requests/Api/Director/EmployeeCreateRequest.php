@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api;
+namespace App\Http\Requests\Api\Director;
 
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
  * Class ProjectUpdateRequest
  * @package App\Http\Requests
  */
-class CompanyUpdateRequest extends FormRequest
+class EmployeeCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -20,7 +20,7 @@ class CompanyUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Auth::user()->can(['update company']);
+        return Auth::check();
     }
 
     /**
@@ -31,20 +31,18 @@ class CompanyUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|exists:companies',
             'phone' => [
                 'required',
                 'regex:/^998[0-9]{9}/',
-                'unique:companies,phone,' . $this->id . ',id'
+                'unique:employees,phone'
             ],
-            'name' => 'required|string',
-            'chief_id' => [
-                'required',
-                'exists:employees,id',
-                'unique:companies,chief_id,' . $this->id . ',id'
-            ],
-            'email' => 'required|email',
-            'site' => 'required|url',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'fathers_name' => 'required|string',
+            'position_id' => 'required|exists:positions,id',
+            'login' => 'required|string|unique:employees,login',
+            'password' => 'required|string|min:6',
+            'passport' => 'required|string|unique:employees,passport',
             'address' => 'required|string',
         ];
     }

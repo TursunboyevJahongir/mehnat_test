@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api;
+namespace App\Http\Requests\Api\Director;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
  * Class ProjectUpdateRequest
  * @package App\Http\Requests
  */
-class EmployeeUpdateProfileRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

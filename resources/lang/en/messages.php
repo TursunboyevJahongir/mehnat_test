@@ -9,6 +9,7 @@ return [
     'cannot_delete_using_element' => 'You cannot delete the used element, the but can edit',
     'cannot_change_superadmin' => "You don't have access to delete or update SuperAdmin",
     'position_deleted' => "':attribute' position removed",
-    'employee_deleted' => "Employee ':attribute' removed",
+    'employee_deleted' => "Director ':attribute' removed",
     'company_deleted' => "':attribute' company removed",
+    'isnt_your_worker' => "This is not your worker",
 ];

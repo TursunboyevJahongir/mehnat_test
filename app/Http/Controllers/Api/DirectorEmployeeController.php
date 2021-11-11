@@ -3,23 +3,22 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\ApiController;
-use App\Http\Requests\Api\EmployeeCreateRequest;
-use App\Http\Requests\Api\EmployeeUpdateProfileRequest;
-use App\Http\Requests\Api\EmployeeUpdateRequest;
+use App\Http\Requests\Api\Director\EmployeeCreateRequest;
+use App\Http\Requests\Api\Director\EmployeeUpdateRequest;
+use App\Http\Requests\Api\Director\UpdateProfileRequest;
 use App\Http\Resources\Api\AllEmployeeResource;
 use App\Http\Resources\Api\EmployeeResource;
 use App\Http\Resources\Api\PaginationResourceCollection;
-use App\Models\Company;
 use App\Models\Employee;
-use App\Services\EmployeeService;
+use App\Services\DirectorEmployeeService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class EmployeeController extends ApiController
+class DirectorEmployeeController extends ApiController
 {
     public function __construct(
-        protected EmployeeService $service,
+        protected DirectorEmployeeService $service,
     )
     {
     }
@@ -30,19 +29,7 @@ class EmployeeController extends ApiController
         $position = $request->position_id ?? null;
         try {
             return $this->success(__('messages.success'),
-                new PaginationResourceCollection($this->service->index($size, $position), AllEmployeeResource::class));
-        } catch (Exception $e) {
-            return $this->error($e->getMessage(), null, $e->getCode());
-        }
-    }
-
-    public function companyEmployees(Request $request, Company $company): JsonResponse
-    {
-        $size = $request->get('per_page') ?? config('app.per_page');
-        $position = $request->position_id ?? null;
-        try {
-            return $this->success(__('messages.success'),
-                new PaginationResourceCollection($this->service->companyEmployees($company, $size, $position), AllEmployeeResource::class));
+                new PaginationResourceCollection($this->service->companyEmployees(auth()->user()->director, $size, $position), AllEmployeeResource::class));
         } catch (Exception $e) {
             return $this->error($e->getMessage(), null, $e->getCode());
         }
@@ -50,7 +37,12 @@ class EmployeeController extends ApiController
 
     public function show(Employee $id): JsonResponse
     {
-        return $this->success(__('messages.success'), new EmployeeResource($id));
+        try {
+            return $this->success(__('messages.success'), new EmployeeResource($this->service->show($id)));
+        } catch (Exception $e) {
+            return $this->error($e->getMessage(), null, $e->getCode());
+        }
+
     }
 
     public function create(EmployeeCreateRequest $request): JsonResponse
@@ -72,7 +64,27 @@ class EmployeeController extends ApiController
      */
     public function delete(Employee $id): JsonResponse
     {
-        $id->delete();
-        return $this->success(__('messages.employee_deleted', ['attribute' => $id->first_name]));
+        try {
+            $this->service->delete($id);
+            return $this->success(__('messages.employee_deleted', ['attribute' => $id->first_name]));
+        } catch (Exception $e) {
+            return $this->error($e->getMessage(), null, $e->getCode());
+        }
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return JsonResponse
+     */
+    public function me(): JsonResponse
+    {
+        return $this->success(__('messages.success'), new EmployeeResource(auth()->user()));
+    }
+
+    public function updateProfile(UpdateProfileRequest $request): JsonResponse
+    {
+        $this->service->updateProfile($request->validated());
+        return $this->success(__('messages.success'), new EmployeeResource(auth()->user()));
     }
 }
