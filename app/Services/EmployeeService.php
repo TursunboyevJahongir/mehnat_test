@@ -18,11 +18,6 @@ class EmployeeService
             ->when(isset($position), function ($employee, $position) {
                 return $employee->wherePositionId($position);
             })
-//            ->when(isset($role), function ($employee, $role) {
-//                return $employee->whereHas('roles', function ($query) use ($role) {
-//                    $query->where('name', $role);
-//                });
-//            })//todo
             ->paginate($size);
     }
 

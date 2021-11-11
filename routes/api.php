@@ -32,6 +32,12 @@ Route::middleware('jwt.verify')->group(function () {
         Route::get('me', [AdminController::class, 'me']);
         Route::put('me', [AdminController::class, 'updateProfile']);
 
+        Route::get('admins', [AdminController::class, 'index'])->middleware('can:read admin');
+        Route::get('admins/{id}', [AdminController::class, 'show'])->middleware('can:read admin');
+        Route::post('admins', [AdminController::class, 'create'])->middleware('can:create admin');
+        Route::put('admins', [AdminController::class, 'update'])->middleware('can:update admin');
+        Route::delete('admins/{id}', [AdminController::class, 'delete'])->middleware('can:delete admin');
+
         Route::get('roles', [RoleController::class, 'index'])->middleware('can:read role');
         Route::get('permissions', [RoleController::class, 'permissions'])->middleware('can:read role');
         Route::get('role/{name}', [RoleController::class, 'show'])->middleware('can:read role');
