@@ -19,7 +19,6 @@ class CompanyFactory extends Factory
     public function configure()
     {
         return $this->afterCreating(static function (Company $company) {
-            $company->chief->company_id = $company->id;
             $company->chief->position_id = Position::query()->where('name', "Директор")->first()->id;
             $company->chief->save();
         });
@@ -32,11 +31,12 @@ class CompanyFactory extends Factory
      */
     public function definition()
     {
+
         return [
             'name' => $this->faker->unique()->company(),
             'email' => $this->faker->unique()->companyEmail(),
             'site' => $this->faker->url,
-            'chief_id' => Employee::all()?->random()->id,
+            'chief_id' => Employee::query()->whereNotIn('id', Company::pluck('chief_id'))->get()->random()->id,
             'creator_id' => Admin::all()->random()->id,
             'phone' => '998' . $this->faker->numberBetween('100000000', '999999999'),
             'address' => $this->faker->address,

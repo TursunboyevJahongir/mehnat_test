@@ -10,4 +10,5 @@ return [
     'cannot_change_superadmin' => "You don't have access to delete or update SuperAdmin",
     'position_deleted' => "':attribute' position removed",
     'employee_deleted' => "Employee ':attribute' removed",
+    'company_deleted' => "':attribute' company removed",
 ];

@@ -6,7 +6,7 @@ use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CompanyResource extends JsonResource
+class AllCompaniesResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -22,10 +22,7 @@ class CompanyResource extends JsonResource
         return [
             "id" => $this->id,
             "name" => $this->name,
-            "director" => $this->chief?->full_name,
-            "creator" => $this->creator->name,
-            "email" => $this->email,
-            "site" => $this->site,
+            "full_name" => $this->chief?->full_name,
             "phone" => $this->phone,
             "address" => $this->address,
         ];

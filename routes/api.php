@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\PositionController;
 use App\Http\Controllers\Api\RoleController;
@@ -42,6 +43,12 @@ Route::middleware('jwt.verify')->group(function () {
         Route::put('position/{id}', [PositionController::class, 'update'])->middleware('can:update position');
         Route::delete('position/{id}', [PositionController::class, 'delete'])->middleware('can:delete position');
 
+        Route::get('company', [CompanyController::class, 'index'])->middleware('can:read company');
+        Route::get('company/{id}', [CompanyController::class, 'show'])->middleware('can:read company');
+        Route::post('company', [CompanyController::class, 'create'])->middleware('can:create company');
+        Route::put('company', [CompanyController::class, 'update'])->middleware('can:create company');
+        Route::delete('company/{id}', [CompanyController::class, 'delete'])->middleware('can:delete company');
+
         Route::get('company/{company}/employee', [EmployeeController::class, 'companyEmployees'])->middleware('can:read employee');
         Route::get('all/employee', [EmployeeController::class, 'index'])->middleware('can:read employee');
         Route::get('employee/{id}', [EmployeeController::class, 'show'])->middleware('can:read employee');
@@ -53,5 +60,11 @@ Route::middleware('jwt.verify')->group(function () {
     Route::middleware('auth:employee-api')->prefix('employee')->group(static function () {
         Route::get('me', [EmployeeController::class, 'me']);
         Route::put('me', [EmployeeController::class, 'updateProfile']);
+
+        Route::get('company', [CompanyController::class, 'myCompany']);
+
+        Route::middleware('only.director')->group(static function () {
+            Route::put('company', [CompanyController::class, 'updateMyCompany']);
+        });
     });
 });
