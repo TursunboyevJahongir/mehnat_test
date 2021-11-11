@@ -18,5 +18,10 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminSeeder::class);
         $this->call(PermissionsSeeder::class);
         $this->call(PositionSeeder::class);
+        $this->call(EmployeeSeeder::class);
+        \App\Models\Company::factory(1)->create();
+        \App\Models\Employee::factory(10)->create();
+        \App\Models\Company::factory(10)->create();
+        \App\Models\Employee::factory(100)->create();
     }
 }

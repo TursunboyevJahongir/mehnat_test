@@ -54,8 +54,12 @@ class RoleController extends ApiController
      */
     public function update(RoleUpdateRequest $request, string $name): JsonResponse
     {
-        return $this->success(__('messages.success'),
-            new RoleWithPermissionsResource($this->roleService->update($name, $request->validated())));
+        try {
+            return $this->success(__('messages.success'),
+                new RoleWithPermissionsResource($this->roleService->update($name, $request->validated())));
+        } catch (\Throwable $e) {
+            return $this->error($e->getMessage(), null, $e->getCode());
+        }
     }
 
     /**

@@ -36,6 +36,9 @@ class RoleService
 
     public function update(string $name, array $data): Model|Builder
     {
+        if ($name === 'superadmin') {
+            throw new \Exception(__('messages.cannot_change_superadmin'), 403);
+        }
         $role = Role::query()->where('name', $name)->firstOrFail();
         $role->syncPermissions($data['permissions']);
         return $role;

@@ -16,7 +16,9 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property string first_name
  * @property string last_name
  * @property string fathers_name
+ * @property string $full_name first last fathers name
  * @property int position_id
+ * @property int company_id
  * @property string login
  * @property string password
  * @property string phone
@@ -28,7 +30,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  */
 class Employee extends Authenticatable implements JWTSubject
 {
-    use HasFactory, HasRoles;
+    use HasFactory;
 
     protected $fillable = [
         'first_name',
@@ -42,6 +44,11 @@ class Employee extends Authenticatable implements JWTSubject
         'address',
         'passport',
     ];
+
+    public function getFullNameAttribute(): string
+    {
+        return $this->first_name . " " . $this->last_name . " " . $this->fathers_name;
+    }
 
     public function company(): BelongsTo
     {

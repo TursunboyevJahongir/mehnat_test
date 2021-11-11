@@ -2,11 +2,11 @@
 
 namespace App\Http\Resources\Api;
 
-use App\Models\Product;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProductResource extends JsonResource
+class CompanyResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,14 +17,17 @@ class ProductResource extends JsonResource
     public function toArray($request)
     {
         /**
-         * @var Product $this
+         * @var Company $this
          */
         return [
             "id" => $this->id,
             "name" => $this->name,
-            "description" => $this->sub_description,
-            "price" => $this->moneyFormatter($this->price),
-            "main_image" => $this->mainImage?->file_url,
+            "full_name" => $this->chief?->full_name,
+            "creator" => $this->creator->name,
+            "email" => $this->email,
+            "site" => $this->site,
+            "phone" => $this->phone,
+            "address" => $this->address,
         ];
     }
 }

@@ -21,5 +21,7 @@ class PositionSeeder extends Seeder
         Position::create(['name' => 'Специалист по программированию']);
         Position::create(['name' => 'Оператор']);
         Position::create(['name' => 'Водитель']);
+        Position::create(['name' => 'Водитель']);
+        Position::create(['name' => 'Сотрудники']);
     }
 }

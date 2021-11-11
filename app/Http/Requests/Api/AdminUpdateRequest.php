@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Rules\PhoneRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;

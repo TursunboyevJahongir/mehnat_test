@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string phone
  * @property string site
  * @property Employee|hasMany employees
- * @property Employee|belongsTo chief Корхона раҳбари
+ * @property Employee|belongsTo $chief Корхона раҳбари
  * @property Admin|belongsTo creator
  */
 class Company extends Model
@@ -31,10 +31,10 @@ class Company extends Model
         'name',
         'chief_id',
         'creator_id',
-        'address',
         'email',
         'site',
         'phone',
+        'address',
     ];
 
     /**

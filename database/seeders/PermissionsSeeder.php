@@ -19,8 +19,6 @@ class PermissionsSeeder extends Seeder
     {
         $superadmin = Role::create(['name' => 'superadmin'],);
         $admin = Role::create(['name' => 'admin']);
-        $director = Role::create(['name' => 'director']);
-
 
         Permission::create(['name' => 'read company']);
         Permission::create(['name' => 'create company']);
@@ -31,9 +29,6 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'create employee']);
         Permission::create(['name' => 'update employee']);
         Permission::create(['name' => 'delete employee']);
-
-        $director->syncPermissions(Permission::all());
-
 
         Permission::create(['name' => 'read admin']);
         Permission::create(['name' => 'create admin']);

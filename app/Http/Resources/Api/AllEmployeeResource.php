@@ -2,11 +2,11 @@
 
 namespace App\Http\Resources\Api;
 
-use App\Models\Category;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CategoryResource extends JsonResource
+class AllEmployeeResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,15 +14,17 @@ class CategoryResource extends JsonResource
      * @param Request $request
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         /**
-         * @var Category $this
+         * @var Employee $this
          */
         return [
             "id" => $this->id,
-            "name" => $this->name,
-            "ico" => $this->ico?->file_url,
+            "full_name" => $this->full_name,
+            "position" => $this->position->name,
+            "company" => $this->company?->name,
+            "phone" => $this->phone,
         ];
     }
 }
