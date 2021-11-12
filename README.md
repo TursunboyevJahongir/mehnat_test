@@ -11,9 +11,12 @@
 ### Awesome README [](https://documenter.getpostman.com/view/9990014/UVC8B5ht)
 > <a href="public/Mehnat.uz.pdf" download>documentation Pdf</a>
     
+<details><summary><b style="color:#355C7D;font-size:20px">DataBase</b></summary>
     
 > <img align="center" src="public/img.png">
-
+    
+</details>
+    
 #### <b style="color:#35a79c ">Multi-User API Authentication Using Laravel `JWT`(Admin,Employee)</b>
 
      Login
