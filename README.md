@@ -61,7 +61,3 @@
 ```
 
 </details>
-
-<a href="https://documenter.getpostman.com/view/9990014/UVC8B5ht" target="_blank"><img src="https://github.com/TursunboyevJahongir/click-test-tesk/blob/master/public/postman.svg" width="50">
-public documentation</a>
-<p><a href="public/Mehnat.uz.pdf" download>documentation Pdf</a></p>
