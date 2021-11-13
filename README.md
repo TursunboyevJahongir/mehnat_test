@@ -1,13 +1,11 @@
-##Description
 
------------
-Administrators can create campaigns and appoint a director. Each director can change the details of his company and hire, fire an employee from his company.
-Every employee has the right to receive information about his campaign and edit his profile.
+## Description
+Administrators can create companies and appoint a director. Each director can change the details of his company and hire, fire an employee from his company.
+Every employee has the permission to receive information about his company and edit his profile.
 
-:white_check_mark: The super administrator has all the rights that she can manage administrators, campaigns, roles, positions, employees.
-and can change the permissions from the role.
-
-===========
+:white_check_mark: The `superAdmin` has all permissions that he can manage administrators, companies, roles, positions, employees.
+And can change permissions from roles.
+##
 
 ### Used
 
