@@ -17,7 +17,7 @@ And can change permissions from roles.
 
 # In Project
 <a href="https://documenter.getpostman.com/view/9990014/UVC8B5ht" target="_blank"><img src="https://github.com/TursunboyevJahongir/click-test-tesk/blob/master/public/postman.svg" align="right" width="50">
-### Awesome README [](https://documenter.getpostman.com/view/9990014/UVC8B5ht)
+### Global postman documentation [](https://documenter.getpostman.com/view/9990014/UVC8B5ht)
 > <a href="public/Mehnat.uz.pdf" download>documentation Pdf</a><br>
 > <a href="public/Mehnat.uz.postman_collection.json" download>Postman Collection</a>
     
