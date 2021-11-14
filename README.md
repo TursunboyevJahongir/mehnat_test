@@ -64,14 +64,14 @@ And can change permissions from roles.
 
 ```
 - Profile RU
-- Company R --self company
+- Company R --his company
 ```
 
 #### <b style="color:#35a79c">Director</b>
 
 ```
-- Employee CRUD --to self company
-- Company RU --self company
+- Employee CRUD --to his company
+- Company RU --his company
 ```
 
 </details>
