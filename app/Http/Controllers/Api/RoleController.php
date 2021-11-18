@@ -7,7 +7,6 @@ use App\Http\Requests\Api\RoleCreateRequest;
 use App\Http\Requests\Api\RoleUpdateRequest;
 use App\Http\Resources\Api\RoleResource;
 use App\Http\Resources\Api\RoleWithPermissionsResource;
-use App\Services\AdminService;
 use App\Services\RoleService;
 use Illuminate\Http\JsonResponse;
 
@@ -21,8 +20,7 @@ class RoleController extends ApiController
 
     public function index(): JsonResponse
     {
-        $roles = $this->roleService->index();
-        return $this->success(__('messages.success'), RoleResource::collection($roles));
+        return $this->success(__('messages.success'), RoleResource::collection($this->roleService->index()));
 
     }
 
