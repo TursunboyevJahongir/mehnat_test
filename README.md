@@ -17,52 +17,61 @@ And can change permissions from roles.
 
 # In Project
 <a href="https://documenter.getpostman.com/view/9990014/UVC8B5ht" target="_blank"><img src="https://github.com/TursunboyevJahongir/click-test-tesk/blob/master/public/postman.svg" align="right" width="50">
-### Global postman documentation [](https://documenter.getpostman.com/view/9990014/UVC8B5ht)
-> <a href="public/kesh_app.pdf" download>documentation Pdf</a><br>
-> <a href="public/kesh_app.postman_collection.json" download>Postman Collection</a>
+### Awesome README [](https://documenter.getpostman.com/view/9990014/UVC8B5ht)
+> <a href="public/Mehnat.uz.pdf" download>documentation Pdf</a><br>
+> <a href="public/Mehnat.uz.postman_collection.json" download>Postman Collection</a>
     
 <details><summary><b style="color:#355C7D;font-size:20px">DataBase</b></summary>
     
-> <img align="center" src="public/db.png">
+> <img align="center" src="public/img.png">
     
 </details>
     
-#### <b style="color:#35a79c ">Authentication Using Laravel `Sanctum`</b>
+#### <b style="color:#35a79c ">Multi-User API Authentication Using Laravel `JWT`(Admin,Employee)</b>
 
-     Registratioin
      Login
      logout
      refresh Refresh token
 
 <details><summary><b style="color:#17A2B8">CRUD</b></summary>
 
+
 > C create
-
+> 
 > R read
-
+> 
 > U update
-
+> 
 > D delete
 
 
 </details>
-<details><summary><b style="color:#355C7D;font-size:18px">Public api</b></summary>
 
-```
-- categories R
-- product R
-- search
-```
-</details>
-
-<details><summary><b style="color:#355C7D;font-size:20px">User</b></summary>
+<details><summary><b style="color:#355C7D;font-size:20px">Admin</b></summary>
 
 ```
 - Profile RU
-- User CRUD --- set role
+- Admins CRUD --- set role
 - Role CRUD
-- Category CRUD
-- Product CRUD
+- Position CRUD
+- Company CRUD
+- Employee CRUD
 ```
+
 </details>
 
+<details><summary><b style="color:#355C7D;font-size:18px">Employee</b></summary>
+
+```
+- Profile RU
+- Company R --his company
+```
+
+#### <b style="color:#35a79c">Director</b>
+
+```
+- Employee CRUD --to his company
+- Company RU --his company
+```
+
+</details>
