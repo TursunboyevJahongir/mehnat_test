@@ -10,7 +10,7 @@ use App\Http\Resources\Api\AllCompaniesResource;
 use App\Http\Resources\Api\CompanyResource;
 use App\Http\Resources\Api\PaginationResourceCollection;
 use App\Models\Company;
-use App\Services\CompanyService;
+use App\Services\CompanyCrudService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 class CompanyController extends ApiController
 {
     public function __construct(
-        protected CompanyService $service,
+        protected CompanyCrudService $service,
     )
     {
     }
@@ -28,7 +28,7 @@ class CompanyController extends ApiController
         $size = $request->get('per_page') ?? config('app.per_page');
         try {
             return $this->success(__('messages.success'),
-                new PaginationResourceCollection($this->service->index($size), AllCompaniesResource::class));
+                new PaginationResourceCollection($this->service->AllWithPagination($size), AllCompaniesResource::class));
         } catch (Exception $e) {
             return $this->error($e->getMessage(), null, $e->getCode());
         }
